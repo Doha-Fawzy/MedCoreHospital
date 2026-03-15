@@ -36,7 +36,7 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
         new Appointment
         {
             Id = 1,
-            PatientId = 1,
+            PatientId = 2,
             ScheduleId = 1,
             Status = AppointmentStatus.Pending,
             IsDeleted = false

@@ -32,7 +32,7 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
         builder.HasData(
             new 
             {
-                Id = 1,
+                Id = 2,
                 FullName = "Ali Hassan",
                 NationalId = "987654321",
                 DateOfBirth = new DateTime(1995, 3, 1),
@@ -42,11 +42,11 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
             }
         );
        builder.OwnsOne(p => p.Allergies).HasData(
-            new { PatientId = 1, Food = (string?)null, Medicine = (string?)null }
+            new { PatientId = 2, Food = (string?)null, Medicine = (string?)null }
         );
 
        builder.OwnsOne(p => p.ChronicConditions).HasData(
-            new { PatientId = 1, Diseases = (string?)null }
+            new { PatientId = 2, Diseases = (string?)null }
         );
     }
 }
