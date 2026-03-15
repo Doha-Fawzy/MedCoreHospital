@@ -7,20 +7,21 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
 {
     public void Configure(EntityTypeBuilder<Doctor> builder)
     {
+       
+        builder.ToTable("Doctors");
+
         builder.Property(d => d.LicenseNumber)
                .IsRequired()
                .HasMaxLength(100);
 
         builder.Property(d => d.HourRate)
                .HasColumnType("decimal(10,2)");
-//==============================================
-        builder.Property(d => d.Schedules)
-            .IsRequired();
-//==============================================
+
         builder.HasOne(d => d.Specialty)
                .WithMany(s => s.Doctors)
                .HasForeignKey(d => d.SpecialtyId)
                .OnDelete(DeleteBehavior.Restrict);
+
         builder.Property<DateTime>("CreatedAt")
             .HasDefaultValueSql("GETUTCDATE()");
         //Concrete Property
@@ -37,7 +38,9 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
             Gender = Gender.Male,
             SpecialtyId = 1,
             HourRate = 500,
-            LicenseNumber = "DOC123"
+            LicenseNumber = "DOC123",
+            IsDeleted = false
+
         }
     );
 

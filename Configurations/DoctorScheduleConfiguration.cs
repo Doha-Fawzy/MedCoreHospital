@@ -1,6 +1,5 @@
 ﻿using MedCoreHospital.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 public class DoctorScheduleConfiguration : IEntityTypeConfiguration<DoctorSchedule>
@@ -25,7 +24,7 @@ public class DoctorScheduleConfiguration : IEntityTypeConfiguration<DoctorSchedu
                .HasForeignKey<Appointment>(a => a.ScheduleId)
                .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasQueryFilter(s => !s.IsDeleted);
+        builder.HasQueryFilter(s => s.IsDeleted == false);
         //Shadow Property
         builder.Property<DateTime>("CreatedAt")
             .HasDefaultValueSql("GETUTCDATE()");
@@ -49,7 +48,8 @@ public class DoctorScheduleConfiguration : IEntityTypeConfiguration<DoctorSchedu
             DoctorId = 1,
             StartTime = new DateTime(2025, 1, 1, 10, 0, 0),
             EndTime = new DateTime(2025, 1, 1, 11, 0, 0),
-            IsBooked = false
+            IsBooked = false,
+            IsDeleted = false
         }
     );
     }

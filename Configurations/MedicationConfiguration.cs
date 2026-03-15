@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MedCoreHospital.Models;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 public class MedicationConfiguration : IEntityTypeConfiguration<Medication>
 {
@@ -13,7 +12,7 @@ public class MedicationConfiguration : IEntityTypeConfiguration<Medication>
                .IsRequired()
                .HasMaxLength(100);
 
-        builder.HasQueryFilter(m => !m.IsDeleted);
+        builder.HasQueryFilter(m => m.IsDeleted == false);
         //Shadow property t
         builder.Property<DateTime>("CreatedAt")
             .HasDefaultValueSql("GETUTCDATE()");
@@ -26,8 +25,9 @@ public class MedicationConfiguration : IEntityTypeConfiguration<Medication>
                .HasMaxLength(100);
 
         builder.HasData(
-        new Medication { Id = 1, Name = "Aspirin", GenericName = "Acetylsalicylic Acid" },
-        new Medication { Id = 2, Name = "Paracetamol", GenericName = "Acetaminophen" }
+            
+        new Medication { Id = 1, Name = "Aspirin", GenericName = "Acetylsalicylic Acid", IsDeleted = false},
+        new Medication { Id = 2, Name = "Paracetamol", GenericName = "Acetaminophen", IsDeleted = false}
     );
 
     }

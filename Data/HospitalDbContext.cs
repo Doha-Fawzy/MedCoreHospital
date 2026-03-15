@@ -19,6 +19,10 @@ public class HospitalDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //modelBuilder.Entity<User>()
+        // .HasDiscriminator<string>("UserType")
+        // .HasValue<Doctor>("Doctor")
+        // .HasValue<Patient>("Patient");
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(HospitalDbContext).Assembly);
         //Shadow Property "CreatedAt"
 

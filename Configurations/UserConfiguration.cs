@@ -14,13 +14,13 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                .IsUnique();
 
         // Check Constraint
-        builder.ToTable(t =>
-        {
-            t.HasCheckConstraint(
-                "CK_User_DOB",
-                "DateOfBirth < GETDATE()"
-            );
-        });
+            builder.ToTable("Users", t =>
+            {
+                t.HasCheckConstraint(
+                    "CK_User_DOB",
+                    "DateOfBirth < GETDATE()"
+                );
+            });
 
         // Concurrency Token (RowVersion)
         builder.Property(u => u.Version)

@@ -23,10 +23,9 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
                .WithOne(p => p.Appointment)
                .HasForeignKey(p => p.AppointmentId);
         //soft delete
-        builder.HasQueryFilter(a => !a.IsDeleted);
-
+        builder.HasQueryFilter(a => a.IsDeleted == false);
         //Shadow Property 
-       builder.Property<DateTime>("CreatedAt")
+        builder.Property<DateTime>("CreatedAt")
             .HasDefaultValueSql("GETUTCDATE()");
 
         //Concrete Property
@@ -39,7 +38,8 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
             Id = 1,
             PatientId = 1,
             ScheduleId = 1,
-            Status = AppointmentStatus.Pending
+            Status = AppointmentStatus.Pending,
+            IsDeleted = false
         }
     );
     }

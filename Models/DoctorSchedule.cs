@@ -15,7 +15,7 @@ namespace MedCoreHospital.Models
         public Doctor? Doctor { get; set; }
         public Appointment? Appointment { get; set; }
         public DateTime? LastModified { get; set; }
-        public byte[] Version { get; set; }
+        public byte[]? Version { get; set; }
     }
 
 }

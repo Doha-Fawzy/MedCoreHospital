@@ -7,6 +7,8 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
 {
     public void Configure(EntityTypeBuilder<Patient> builder)
     {
+     
+        builder.ToTable("Patients");
         builder.Property(p => p.BloodType)
                .IsRequired();
 
@@ -28,14 +30,15 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
                .ValueGeneratedOnAddOrUpdate();
 
         builder.HasData(
-            new Patient
+            new 
             {
                 Id = 1,
                 FullName = "Ali Hassan",
                 NationalId = "987654321",
                 DateOfBirth = new DateTime(1995, 3, 1),
                 Gender = Gender.Male,
-                BloodType = BloodType.A
+                BloodType = BloodType.A,
+                IsDeleted = false
             }
         );
        builder.OwnsOne(p => p.Allergies).HasData(
